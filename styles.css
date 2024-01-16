@@ -37,7 +37,7 @@ img, svg {
 .container {
     margin: auto auto;
     padding: 0px 24px;
-    max-width: 1344px;
+    /* max-width: 1344px; */
     width: 100%;
     box-sizing: border-box;
     justify-content: space-between;
