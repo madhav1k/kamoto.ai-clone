@@ -1,3 +1,5 @@
+let scroll1;
+let scroll2;
 (function () {	
 	// 1. AOS initialization
 	AOS.init({
@@ -85,19 +87,56 @@
 
 		// Collapse navbar menu on scroll down
 		if (window.matchMedia("(max-width: 991px)").matches) {
+			
 			const navbarCollapse = header.querySelector(".navbar-collapse");
-			const dropdownMenu = header.querySelector(".dropdown-menu");
 			const navbarToggler = header.querySelector(".navbar-toggler");
 
 			window.addEventListener("scroll", () => {
 				const scrollPosition = window.scrollY;
 				const isExpanded = navbarToggler.getAttribute("aria-expanded") === "true";
-
+				
 				if (isExpanded && scrollPosition > 0) {
 					navbarCollapse.classList.remove("show");
 					navbarToggler.setAttribute("aria-expanded", "false");
 				}
 			});
 		}
+
+		window.addEventListener("scroll", () => {
+			scroll1 = window.scrollY;
+			setTimeout(function() {
+				scroll2 = window.scrollY;
+			}, 500);
+			let dir = (scroll1-scroll2) >= 0 ? 1 : -1;
+			console.log("dir", dir);
+
+			if (dir === +1) {
+				const scrollPosition = window.scrollY;
+				const d1 = document.getElementById("d1");
+				const d2 = document.getElementById("d2");
+				if (scrollPosition >= 50) {
+					d1.style.opacity = 0;
+					d1.style.visibility = "hidden";
+					d1.style.top = "40";
+					d2.style.opacity = 0;
+					d2.style.visibility = "hidden";
+					d2.style.top = "40";
+				}
+			}
+
+			if (dir === -1) {
+				const scrollPosition = window.scrollY;
+				const d1 = document.getElementById("d1");
+				const d2 = document.getElementById("d2");
+				if (scrollPosition <= 105) {
+					d1.style.removeProperty("opacity");
+					d1.style.removeProperty("visibility");
+					d1.style.removeProperty("top");
+					d2.style.removeProperty("opacity");
+					d2.style.removeProperty("visibility");
+					d2.style.removeProperty("top");
+				}
+			}
+		});
 	}
 })();

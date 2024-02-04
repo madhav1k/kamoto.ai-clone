@@ -107,10 +107,6 @@ img, svg {
     transition: all 0.2s ease-in-out;
 }
 
-.collapse:not(.show) {
-    display: none;
-}
-
 .dropdown-menu {
     position: absolute;
     opacity: 0;
